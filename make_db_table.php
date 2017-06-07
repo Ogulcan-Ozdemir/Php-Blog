@@ -9,7 +9,7 @@ if (!$con) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
-// Hocam ekranda görünmesin diye comment out ettim echo ları
+
 $sql_database = "CREATE DATABASE IF NOT EXISTS accounts_database";
 if (mysqli_query($con, $sql_database)) {
     // echo "Database created successfully";
@@ -17,7 +17,7 @@ if (mysqli_query($con, $sql_database)) {
     echo "Error creating database: " . mysqli_error($con);
 }
 
-// Account table yoksa yapıcak
+
 $con_table= mysqli_connect($servername, $username, $password, $dbname);
 $sql_table = "CREATE TABLE IF NOT EXISTS Accounts (
 id INT(5) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
