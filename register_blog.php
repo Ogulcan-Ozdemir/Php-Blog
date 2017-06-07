@@ -5,8 +5,7 @@ $password = "your_password";
 $dbname = "accounts_database";
 //Object oriented mysqli
 $con_table = new mysqli($servername, $username, $password,$dbname);
-/*Hocam security fonksiyonu aşağıda sadece htmlspecialchars kontrol ettim aslında mysql de kontrol edecektim Ama htmlspecialcharstan sonra hemen mysql_real_escape_string
-kontrol edince çöktü anlamadığım bir sebeble*/
+
 $email=security($con_table,$_POST["email"]);
 $password=security($con_table,$_POST["password"]);
 $post=security($con_table,$_POST['message']);
@@ -31,7 +30,7 @@ if(filter_var($email,FILTER_VALIDATE_EMAIL) && !empty($email) && !empty($passwor
             if($con_table->query($sql_blog)){
                 if(!empty(trim($post)) && !empty(trim($title))){
                     if($con_table->query($sql_table_insert)===TRUE){
-                        //redirect fonksiyonu ile kullanıcı geri tuşana basmadan blog sayfasına gitsin istedim.
+                      
                         redirect("blog.php");
                     }
                     else {
