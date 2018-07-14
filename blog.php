@@ -38,7 +38,8 @@ $(document).ready(function(){
 });
 </script>
 <?php
-    require("make_db_table.php");
+    require_once("db_constans.php");
+    require_once("make_accounts_table.php");
 ?>
 </head>
 <body>
@@ -53,13 +54,13 @@ $(document).ready(function(){
                 <input type="submit" value="Show in this field blogs">
             </form>
 <?php
-//TODO this should be define as global
-$servername = "localhost";
-$username = "root";
-$password = "your_password";
-$dbname = "accounts_database";
+
+$servername = $GLOBALS['servername'];
+$username = $GLOBALS['username'];
+$password = $GLOBALS['password'];
+$dbname = $GLOBALS['dbname'] ;
 //Procedural mysqli 
-$con_db=mysqli_connect($servername, $username, $password);
+$con_db = mysqli_connect($servername, $username, $password);
 $conn = mysqli_connect($servername, $username, $password, $dbname);
 
 if (!$conn) {

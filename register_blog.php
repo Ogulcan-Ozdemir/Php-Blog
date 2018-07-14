@@ -1,8 +1,8 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "your_password";
-$dbname = "accounts_database";
+$servername = $GLOBALS['servername'];
+$username = $GLOBALS['username'];
+$password = $GLOBALS['password'];
+$dbname = $GLOBALS['dbname'] ;
 //Object oriented mysqli
 $con_table = new mysqli($servername, $username, $password,$dbname);
 
@@ -17,7 +17,7 @@ if(filter_var($email,FILTER_VALIDATE_EMAIL) && !empty($email) && !empty($passwor
    
     $sql_email="INSERT INTO Accounts (email,password) VALUES ('".$email."','".$password."');";
     if($con_table->query($sql_email_check)->num_rows>=1){
-     //Burda blogs table yoksa yapıp Kullanıcnın gönderdiği blog postu ekledim
+     //Check if blogs table exits or make new one
       $sql_blog="CREATE TABLE IF NOT EXISTS blogs (
             id INT(5) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
             post LONGTEXT NOT NULL,
@@ -28,7 +28,7 @@ if(filter_var($email,FILTER_VALIDATE_EMAIL) && !empty($email) && !empty($passwor
             $sql_table_check="SHOW TABLES LIKE 'blogs';";
             $sql_table_insert="INSERT INTO blogs (post,blogger,field,title) VALUES ('$post','$email','$field','$title');";
             if($con_table->query($sql_blog)){
-                if(!empty(trim($post)) && !empty(trim($title))){
+                if(!trim($post) && !trim($title)){
                     if($con_table->query($sql_table_insert)===TRUE){
                       
                         redirect("blog.php");
@@ -49,7 +49,7 @@ if(filter_var($email,FILTER_VALIDATE_EMAIL) && !empty($email) && !empty($passwor
     
     }
     else {
-       include('db_con.php');
+       include('make_accounts_table.php');
     }
 }
 else{
